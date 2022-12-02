@@ -32,7 +32,6 @@ function draw(){
         playerSprite. height
         );
 }
-draw();
 
 function movePlayer(e){
     console.log(e.key);
@@ -42,26 +41,38 @@ function movePlayer(e){
     switch (e.key){
         case 'w':
             playerSprite.src = './res/sprites/mainChar/up.png';
+            lastMove = 'w';
             mapy += 20;
             annimationFrame += 1;
             break;
         case 'a':
+            lastMove = 'a';
             playerSprite.src = './res/sprites/mainChar/left.png';
             mapx += 20;
             annimationFrame += 1;
             break;
         case 's':
+            lastMove = 's';
             playerSprite.src = './res/sprites/mainChar/down.png';
             mapy -= 20;
             annimationFrame += 1;
             break;
         case 'd':
+            lastMove = 'd';
             playerSprite.src = './res/sprites/mainChar/right.png';
             mapx -= 20;
             annimationFrame += 1;
             break;
-
     }
+    draw();
+}
+
+function stopPlayer(){
+    annimationFrame = 0;
+    draw();
 }
 
 window.addEventListener('keydown', movePlayer);
+window.addEventListener('keyup', stopPlayer);
+
+onload(draw());
