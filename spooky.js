@@ -14,12 +14,15 @@ playerSprite.src = './res/sprites/mainChar/down.png';
 let mapx = -3000;
 let mapy = -2000;
 
+let lastMove;
+let annimationFrame = 0;
+
 function draw(){
     window.requestAnimationFrame(draw);
     c.drawImage(map, mapx, mapy);
     c.drawImage(
         playerSprite,
-        0,
+        playerSprite.width / 4 * annimationFrame,
         0,
         playerSprite.width / 4,
         playerSprite.height,
@@ -33,22 +36,29 @@ draw();
 
 function movePlayer(e){
     console.log(e.key);
+    if (annimationFrame == 3){
+        annimationFrame = 0;
+    }
     switch (e.key){
         case 'w':
             playerSprite.src = './res/sprites/mainChar/up.png';
             mapy += 20;
+            annimationFrame += 1;
             break;
         case 'a':
             playerSprite.src = './res/sprites/mainChar/left.png';
             mapx += 20;
+            annimationFrame += 1;
             break;
         case 's':
             playerSprite.src = './res/sprites/mainChar/down.png';
             mapy -= 20;
+            annimationFrame += 1;
             break;
         case 'd':
             playerSprite.src = './res/sprites/mainChar/right.png';
             mapx -= 20;
+            annimationFrame += 1;
             break;
 
     }
