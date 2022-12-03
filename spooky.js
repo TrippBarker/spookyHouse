@@ -10,7 +10,7 @@ const map = new Image();
 map.src = './res/maps/basicMap.png';
 
 const playerSprite = new Image();
-let playas = "skellyman";
+let playas = "ghostie";
 playerSprite.src = './res/sprites/'+ playas +'/down.png';
 
 let mapx = -3000;
