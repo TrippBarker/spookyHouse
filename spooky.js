@@ -1,5 +1,6 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
+const playerSelectButt = document.querySelectorAll('.playerSelect');
 
 
 c.fillStyle = 'white';
@@ -9,7 +10,8 @@ const map = new Image();
 map.src = './res/maps/basicMap.png';
 
 const playerSprite = new Image();
-playerSprite.src = './res/sprites/ghostie/down.png';
+let playas = "skellyman";
+playerSprite.src = './res/sprites/'+ playas +'/down.png';
 
 let mapx = -3000;
 let mapy = -2000;
@@ -40,26 +42,26 @@ function movePlayer(e){
     }
     switch (e.key){
         case 'w':
-            playerSprite.src = './res/sprites/ghostie/up.png';
+            playerSprite.src = './res/sprites/'+ playas +'/up.png';
             lastMove = 'w';
             mapy += 20;
             annimationFrame += 1;
             break;
         case 'a':
             lastMove = 'a';
-            playerSprite.src = './res/sprites/ghostie/left.png';
+            playerSprite.src = './res/sprites/'+ playas +'/left.png';
             mapx += 20;
             annimationFrame += 1;
             break;
         case 's':
             lastMove = 's';
-            playerSprite.src = './res/sprites/ghostie/down.png';
+            playerSprite.src = './res/sprites/'+ playas +'/down.png';
             mapy -= 20;
             annimationFrame += 1;
             break;
         case 'd':
             lastMove = 'd';
-            playerSprite.src = './res/sprites/ghostie/right.png';
+            playerSprite.src = './res/sprites/'+ playas +'/right.png';
             mapx -= 20;
             annimationFrame += 1;
             break;
@@ -72,7 +74,18 @@ function stopPlayer(){
     draw();
 }
 
+function setPlayer(){
+    console.log(this.id);
+    if (this.id == "ghostie"){
+        playas = "ghostie";
+    } else if (this.id == "skellyman") {
+        playas = "mainChar";
+    }
+    draw();
+    document.getElementById("startMenu").classList.toggle("hidden");
+}
+
 window.addEventListener('keydown', movePlayer);
 window.addEventListener('keyup', stopPlayer);
 
-onload(draw());
+playerSelectButt.forEach(selectButt => selectButt.addEventListener('click', setPlayer));
