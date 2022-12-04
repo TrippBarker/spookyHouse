@@ -15,28 +15,25 @@ playerSprite.src = './res/sprites/' + playas + '/down.png';
 
 let mapx = -3000;
 let mapy = -2000;
+let then = Date.now();
+let now;
 
-class Sprite {
-  constructor(position, image) {
-    this.position = position;
-    this.image = image;
-  }
-
-  draw() {
-    c.drawImage(this.image, mapx, mapy);
-  }
-}
-
-const background = new Sprite(position = { x: -3000, y: -2000 }, map);
-
-let speed = 1;
+let speed = 10;
 let lastMove;
 let moving = false;
 let animationFrame = 0;
+let canMove = true;
 
 function draw() {
-  if (moving){
-    switch (lastMove){
+  now = Date.now();
+  if (now - then >= 1) {
+    canMove = true;
+    then = now;
+  } else {
+    canMove = false;
+  }
+  if (moving && canMove) {
+    switch (lastMove) {
       case 'w':
         mapy += speed;
         break;
@@ -51,8 +48,7 @@ function draw() {
         break;
     }
   }
-  window.requestAnimationFrame(draw);
-  background.draw();
+  c.drawImage(map, mapx, mapy);
   c.drawImage(
     playerSprite,
     playerSprite.width / 4 * animationFrame,

@@ -44,6 +44,9 @@ canvas{
     background-color: white;
 }
 
+#canvasHolder{
+  grid-template-areas: ;
+}
 /* Class List */
 .flex{
     display: flex;
