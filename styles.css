@@ -1,18 +1,9 @@
 *{
     font-family: fantasy;
 }
+/* This is a comment */
 
-#startMenu{
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: fixed;
-    margin: auto;
-    background-color: white;
-}
-
+/* HTML TAGS*/
 h1{
     font-size: 32px;
 }
@@ -41,6 +32,19 @@ canvas{
     border-radius: 10px;
 }
 
+/* ID List */
+#startMenu{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    margin: auto;
+    background-color: white;
+}
+
+/* Class List */
 .flex{
     display: flex;
 }

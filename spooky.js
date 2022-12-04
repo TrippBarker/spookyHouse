@@ -29,10 +29,28 @@ class Sprite {
 
 const background = new Sprite(position = { x: -3000, y: -2000 }, map);
 
+let speed = 1;
 let lastMove;
+let moving = false;
 let animationFrame = 0;
 
 function draw() {
+  if (moving){
+    switch (lastMove){
+      case 'w':
+        mapy += speed;
+        break;
+      case 'a':
+        mapx += speed;
+        break;
+      case 's':
+        mapy -= speed;
+        break;
+      case 'd':
+        mapx -= speed;
+        break;
+    }
+  }
   window.requestAnimationFrame(draw);
   background.draw();
   c.drawImage(
@@ -57,25 +75,24 @@ function movePlayer(e) {
     case 'w':
       playerSprite.src = './res/sprites/' + playas + '/up.png';
       lastMove = 'w';
-      mapy += 24;
+      moving = true;
       animationFrame += 1;
       break;
     case 'a':
       lastMove = 'a';
       playerSprite.src = './res/sprites/' + playas + '/left.png';
-      mapx += 24;
+      moving = true;
       animationFrame += 1;
       break;
     case 's':
       lastMove = 's';
       playerSprite.src = './res/sprites/' + playas + '/down.png';
-      mapy -= 24;
-      animationFrame += 1;
+      moving = true;
       break;
     case 'd':
       lastMove = 'd';
       playerSprite.src = './res/sprites/' + playas + '/right.png';
-      mapx -= 24;
+      moving = true;
       animationFrame += 1;
       break;
   }
@@ -83,7 +100,7 @@ function movePlayer(e) {
 }
 
 function stopPlayer() {
-  animationFrame = 0;
+  moving = false;
   draw();
 }
 
@@ -102,3 +119,7 @@ window.addEventListener('keydown', movePlayer);
 window.addEventListener('keyup', stopPlayer);
 
 playerSelectButt.forEach(selectButt => selectButt.addEventListener('click', setPlayer));
+
+// ALEXS DANGER ZONE!!! Revert back to last working code: e9f007f4c
+
+//=========DANGER END=========
