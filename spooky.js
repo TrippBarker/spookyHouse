@@ -16,12 +16,25 @@ playerSprite.src = './res/sprites/'+ playas +'/down.png';
 let mapx = -3000;
 let mapy = -2000;
 
+class Sprite{
+    constructor(position, image){
+        this.position = position;
+        this.image = image;
+    }
+
+    draw() {
+        c.drawImage(this.image, mapx, mapy);
+    }
+}
+
+const background = new Sprite(position= {x: -3000, y:-2000}, map);
+
 let lastMove;
 let annimationFrame = 0;
 
 function draw(){
     window.requestAnimationFrame(draw);
-    c.drawImage(map, mapx, mapy);
+    background.draw();
     c.drawImage(
         playerSprite,
         playerSprite.width / 4 * annimationFrame,
@@ -44,25 +57,25 @@ function movePlayer(e){
         case 'w':
             playerSprite.src = './res/sprites/'+ playas +'/up.png';
             lastMove = 'w';
-            mapy += 20;
+            mapy += 24;
             annimationFrame += 1;
             break;
         case 'a':
             lastMove = 'a';
             playerSprite.src = './res/sprites/'+ playas +'/left.png';
-            mapx += 20;
+            mapx += 24;
             annimationFrame += 1;
             break;
         case 's':
             lastMove = 's';
             playerSprite.src = './res/sprites/'+ playas +'/down.png';
-            mapy -= 20;
+            mapy -= 24;
             annimationFrame += 1;
             break;
         case 'd':
             lastMove = 'd';
             playerSprite.src = './res/sprites/'+ playas +'/right.png';
-            mapx -= 20;
+            mapx -= 24;
             annimationFrame += 1;
             break;
     }
