@@ -24,6 +24,30 @@ let moving = false;
 let animationFrame = 0;
 let canMove = true;
 
+const collisionArray = [];
+for (let i = 0; i < basicMapCollisions.length; i += 60){
+  collisionArray.push(basicMapCollisions.slice(i, i + 60));
+}
+
+collisionArray.forEach(row => {
+  row.forEach(space => {
+    console.log(space);
+  })
+})
+
+class BoundaryObj{
+  constructor(position){
+    this.position = position;
+    this.width = 12 * 11;
+    this.height = 12 * 11;
+  }
+
+  draw(){
+    c.fillStyle = 'red';
+    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+  }
+}
+
 function draw() {
   now = Date.now();
   if (now - then >= 1) {
@@ -84,6 +108,7 @@ function movePlayer(e) {
       lastMove = 's';
       playerSprite.src = './res/sprites/' + playas + '/down.png';
       moving = true;
+      animationFrame += 1;
       break;
     case 'd':
       lastMove = 'd';
@@ -101,7 +126,6 @@ function stopPlayer() {
 }
 
 function setPlayer() {
-  console.log(this.id);
   if (this.id == "ghostie") {
     playas = "ghostie";
   } else if (this.id == "skellyman") {
@@ -111,11 +135,13 @@ function setPlayer() {
   document.getElementById("startMenu").classList.toggle("hidden");
 }
 
+
 window.addEventListener('keydown', movePlayer);
 window.addEventListener('keyup', stopPlayer);
 
 playerSelectButt.forEach(selectButt => selectButt.addEventListener('click', setPlayer));
 
+const boundaries = [];
 // ALEXS DANGER ZONE!!! Revert back to last working code: e9f007f4c
 
 //=========DANGER END=========
